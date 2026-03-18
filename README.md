@@ -1,6 +1,8 @@
 # Shellforge
 Terminal application to generate reverse shells. Great for CTFs.
 
+![Screenshot](https://github.com/minosariane/Shellforge/blob/main/Screenshot.png)
+
 ## Example usage
 The following command generates a reverse shell with "bash -i" encoded in base64
 ``` console
