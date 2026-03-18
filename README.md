@@ -27,6 +27,6 @@ shellforge list-formats
 ```
 Specify which format to use with `--format <FORMAT>` or use one of these:
 ```
---formats top: Top 10 reverse shells
---formats all: Yes
+--format top: Top 10 reverse shells
+--format all: Yes
 ```
