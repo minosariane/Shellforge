@@ -1,4 +1,7 @@
 use clap::{Parser, Subcommand};
+use include_dir::{include_dir, Dir};
+
+static FORMATS_DIR: Dir<'_> = include_dir!("$CARGO_MANIFEST_DIR/formats");
 
 mod commands;
 
