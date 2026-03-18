@@ -1,6 +1,8 @@
-use std::fs;
 use base64::Engine;
 use inline_colorization::*;
+use include_dir::{include_dir, Dir};
+
+static FORMATS_DIR: Dir<'_> = include_dir!("$CARGO_MANIFEST_DIR/formats");
 
 fn process_template(entry: &str, template: &str, ip: &str, port: u16, b64: bool, url: bool) {
     let coloured_ip = format!("{color_cyan}{}{color_reset}", ip);
@@ -37,16 +39,9 @@ pub fn run(ip: String, port: u16, format: String, b64: bool, url: bool) {
     println!("~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
     if format == "all" {
-        let entries = match fs::read_dir("./formats") {
-            Ok(entries) => entries,
-            Err(e) => {
-                eprintln!("Erreur lecture dossier: {}", e);
-                return;
-            }
-        };
 
-        for entry in entries.flatten() {
-            let path = entry.path();
+        for file in FORMATS_DIR.files() {
+            let path = file.path();
 
             let file_name = match path.file_stem().and_then(|s| s.to_str()) {
                 Some(name) => name,
@@ -56,9 +51,12 @@ pub fn run(ip: String, port: u16, format: String, b64: bool, url: bool) {
                 }
             };
 
-            let template = match get_template(file_name) {
-                Some(t) => t,
-                None => continue,
+            let template = match file.contents_utf8() {
+                Some(t) => t.to_string(),
+                None => {
+                    eprintln!("Erreur lecture fichier {:?}", path);
+                    continue;
+                }
             };
 
             process_template(file_name, &template, &ip, port, b64, url);
@@ -91,12 +89,14 @@ pub fn run(ip: String, port: u16, format: String, b64: bool, url: bool) {
 }
 
 fn get_template(format: &str) -> Option<String> {
-    let path = format!("formats/{}.sf", format);
+    let filename = format!("{}.sf", format);
 
-    match fs::read_to_string(&path) {
-        Ok(t) => Some(t),
-        Err(e) => {
-            eprintln!("Erreur lecture fichier {}: {}", path, e);
+    let file = FORMATS_DIR.get_file(&filename)?;
+
+    match file.contents_utf8() {
+        Some(t) => Some(t.to_string()),
+        None => {
+            eprintln!("Erreur lecture fichier {}", filename);
             None
         }
     }
