@@ -3,7 +3,7 @@
 # Shellforge
 Terminal application to generate reverse shells. Great for CTFs.
 
-![Screenshot](https://github.com/minosariane/Shellforge/blob/main/Screenshot.png)
+![Screenshot](https://github.com/minosariane/Shellforge/blob/main/example.gif)
 
 ## Installation
 ### From this repository
