@@ -20,3 +20,13 @@ Some values are set by default. If you just enter your IP, shellforge will gener
 ```console
 shellforge generate -i 192.168.50.1
 ```
+
+List available formats.
+```console
+shellforge list-formats
+```
+Specify which format to use with `--format <FORMAT>` or use one of these:
+```
+--formats top: Top 10 reverse shells
+--formats all: Yes
+```
