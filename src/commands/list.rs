@@ -1,15 +1,12 @@
-use std::fs;
+use crate::FORMATS_DIR;
 
 pub fn run() {
-
     println!("--format top: Top 10 reverse shells");
     println!("--format all: Yes\n");
 
     println!("Available formats:");
 
-    let paths = fs::read_dir("./formats").unwrap();
-
-    for path in paths {
-        println!("{}", path.unwrap().file_name().display().to_string().replace(".sf", ""));
+    for file in FORMATS_DIR.files() {
+        println!("{}", file.path().file_stem().unwrap().to_string_lossy());
     }
 }
