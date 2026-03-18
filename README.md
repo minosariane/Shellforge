@@ -3,6 +3,13 @@ Terminal application to generate reverse shells. Great for CTFs.
 
 ![Screenshot](https://github.com/minosariane/Shellforge/blob/main/Screenshot.png)
 
+## Installation
+```console
+git clone https://github.com/minosariane/Shellforge.git
+cd Shellforge
+cargo install --path .
+```
+
 ## Example usage
 The following command generates a reverse shell with "bash -i" encoded in base64
 ``` console
