@@ -2,7 +2,6 @@
 name = "shellforge"
 version = "1.0.0"
 description = "Terminal tool for generating reverse shells for CTF challenges and educational purposes. Easy to use, fast, and safe for practice environments."
-license = "GPL-3.0 license"
 license-file = "LICENSE"
 edition = "2024"
 
