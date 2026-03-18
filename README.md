@@ -1,7 +1,7 @@
 ![Release](https://img.shields.io/github/v/release/minosariane/Shellforge.svg)
 ![crates.io](https://img.shields.io/crates/v/minosariane-shellforge)
 # Shellforge
-Terminal application to generate reverse shells. Great for CTFs.
+⚠️ Shellforge is intended for ethical use in CTFs, labs, and educational security exercises only.
 
 ![Screenshot](https://github.com/minosariane/Shellforge/blob/main/example.gif)
 
