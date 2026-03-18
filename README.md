@@ -1,13 +1,20 @@
+![Release](https://img.shields.io/github/v/release/minosariane/Shellforge.svg)
+![crates.io](https://img.shields.io/crates/v/minosariane-shellforge)
 # Shellforge
 Terminal application to generate reverse shells. Great for CTFs.
 
 ![Screenshot](https://github.com/minosariane/Shellforge/blob/main/Screenshot.png)
 
 ## Installation
+### From this repository
 ```console
 git clone https://github.com/minosariane/Shellforge.git
 cd Shellforge
 cargo install --path .
+```
+### From Crates.io
+```console
+cargo install minosariane-shellforge
 ```
 
 ## Example usage
