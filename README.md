@@ -1,5 +1,6 @@
 ![Release](https://img.shields.io/github/v/release/minosariane/Shellforge.svg)
 ![crates.io](https://img.shields.io/crates/v/minosariane-shellforge)
+![AUR](https://img.shields.io/aur/version/shellforge)
 # Shellforge
 ⚠️ Shellforge is intended for ethical use in CTFs, labs, and educational security exercises only.
 
@@ -15,6 +16,11 @@ cargo install --path .
 ### From Crates.io
 ```console
 cargo install minosariane-shellforge
+```
+
+### From AUR
+```console
+yay -S shellforge
 ```
 
 ## Example usage
