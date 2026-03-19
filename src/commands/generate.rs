@@ -1,6 +1,5 @@
 use base64::Engine;
 use inline_colorization::*;
-use include_dir::{include_dir, Dir};
 
 use crate::FORMATS_DIR;        //the ../../formats folder is included as crate
 
