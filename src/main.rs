@@ -1,7 +1,7 @@
 use clap::{Parser, Subcommand};
 use include_dir::{include_dir, Dir};
 
-static FORMATS_DIR: Dir<'_> = include_dir!("$CARGO_MANIFEST_DIR/formats");
+static FORMATS_DIR: Dir<'_> = include_dir!("$CARGO_MANIFEST_DIR/formats");        //Include all files in ../formats, those will be merged in the binary when compiled.
 
 mod commands;
 
@@ -15,9 +15,9 @@ struct Cli {
 }
 
 #[derive(Subcommand)]
-enum Commands {
+enum Commands {                                            //There a two main commands: generate and list-formats
 
-    Generate {
+    Generate {                                             //the generate command takes five sub commands: --ip, --port, --format, --b64 and --url
         #[arg(short, long)]
         ip: String,
 
@@ -38,7 +38,7 @@ enum Commands {
 }
 
 fn main() {
-
+                            //It's pretty, isn't it?
     println!(r"
  _______           _______  _        _        ______________    _______  _______  _______  _______  _______ 
 (  ____ \|\     /|(  ____ \( \      ( \      ( |          | )  (  ____ \(  ___  )(  ____ )(  ____ \(  ____ \
@@ -53,7 +53,7 @@ fn main() {
 
     let cli = Cli::parse();
 
-    match cli.command {
+    match cli.command {        //Redirect the user to the specific features
 
         Commands::Generate { ip, port, format, b64, url} => {
             commands::generate::run(ip, port, format, b64, url);
