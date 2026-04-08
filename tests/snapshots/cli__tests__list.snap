@@ -1,0 +1,81 @@
+---
+source: tests/cli.rs
+expression: stdout
+---
+
+ _______           _______  _        _        ______________    _______  _______  _______  _______  _______ 
+(  ____ \|\     /|(  ____ \( \      ( \      ( |          | )  (  ____ \(  ___  )(  ____ )(  ____ \(  ____ \
+| (    \/| )   ( || (    \/| (      | (      | |          | |  | (    \/| (   ) || (    )|| (    \/| (    \/
+| (_____ | (___) || (__    | |      | |      (_|__________|_)  | (__    | |   | || (____)|| |      | (__    
+(_____  )|  ___  ||  __)   | |      | |            |  |        |  __)   | |   | ||     __)| | ____ |  __)   
+      ) || (   ) || (      | |      | |            |  |        | (      | |   | || (\ (   | | \_  )| (      
+/\____) || )   ( || (____/\| (____/\| (____/\      |  |        | )      | (___) || ) \ \__| (___) || (____/\
+\_______)|/     \|(_______/(_______/(_______/      |  |        |/       (_______)|/   \__/(_______)(_______/
+                                                   |__|                                        version 1.0.1
+                                                   (__)
+--format top: Top 10 reverse shells
+--format all: Yes
+
+Available formats:
+C#-bash-i
+C#-tcp-client
+C
+awk
+bash-i
+bash-readline
+bash-udp
+bash196
+bash5
+busybox-nc
+crystal-code
+crystal-system
+curl
+dart
+golang
+haskell
+java-2way
+java
+java_2
+java_3
+java_web
+javascript
+lua
+lua_2
+nc-c
+nc-e
+nc-mkfifo
+ncat-e
+ncat-udp
+nodejs
+nodejs_2
+openssl
+p0wny-shell
+perl-no-sh
+perl-pentest-monkey
+perl
+php-cmd-small
+php-cmd
+php-cmd2
+php-exec
+php-ivan-sinsek
+php-passthru
+php-pentest-monkey
+php-popen
+php-proc_open
+php-shell-exec
+php-system
+php
+python
+python3-shortest
+python3
+python3_2
+python_2
+ruby-no-sh
+ruby
+rustcat
+socat-tty
+socat
+sqlite3-nc-mkfifo
+telnet
+vlang
+zsh

@@ -6,7 +6,7 @@ pub fn run() {
 
     println!("Available formats:");
 
-    for file in FORMATS_DIR.files() {                                            //Return every filename without the extension
+    for file in FORMATS_DIR.files() {
         println!("{}", file.path().file_stem().unwrap().to_string_lossy());
     }
 }

